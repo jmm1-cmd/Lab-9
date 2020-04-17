@@ -6,6 +6,7 @@
 #include <uart.h>
 #include <adc.h>
 #include <button.h>
+#include <timer.h>
 
 void sweep(void){
     int i = 0;
