@@ -62,9 +62,8 @@ void sweep(void){
     while(i < 90){
         //If object is detected
         if(object[i]){
-            j += 1;
-            while(1){
-                if(object[i] == 0){
+            while(i < 90){
+                if((object[i] == 0)){
                     break; //break if object is no longer detected
                 }
                 sum[j] = sum[j] + Ping[i]; //calculate sum of object distances
@@ -72,6 +71,7 @@ void sweep(void){
                 degrees[j] = degrees[j] + i*2; //calculate sum of object degrees
                 i += 1; //add 1 to i
             }
+            j += 1;
         }
         i += 1; //add 1 to i
     }
