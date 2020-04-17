@@ -4,10 +4,10 @@
 
 void inital_IR_distances(int * IR_val, int * IR_dist, oi_t * sensor_data){
     int move_dist = 50;
-    int init_dist = 500;
+    int init_dist = 800;
     int i;
     //initial collection. put at 50cm and let it run to a wall till 10
-    for(i=0; i<9; i++){ //fixed array of 9
+    for(i=0; i<15; i++){ //fixed array of 16
         IR_val[i] = adc_read();
         IR_dist[i] = init_dist;
         move_forward(sensor_data, move_dist);

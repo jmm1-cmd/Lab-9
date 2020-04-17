@@ -1,5 +1,6 @@
 
 #include "adc.h"
+#include  "math.h"
 /*
   Initialize PORTB to be ADC 
  */
@@ -29,6 +30,7 @@ int adc_read(void) {
 	while ((ADC0_RIS_R & 0b1000) == 0) {}; //wait until a sample has completed conversion
 	result = ADC0_SSFIFO3_R & 0xFFF; //store value in a variable
 	ADC0_ISC_R = 0b1000; //clear the flag saying conversion is done
+	result = 3000000*pow(result,-1.6); //result in centimeters
 	return result; //output the value of the function
 }
 

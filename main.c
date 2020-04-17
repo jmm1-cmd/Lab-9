@@ -23,5 +23,7 @@ int main(void)
     button_init(); //initalize button
     adc_init(); //initalize adc
     ping_init(); //initalize  sonar sensor
+
+    sweep();
 }
 
