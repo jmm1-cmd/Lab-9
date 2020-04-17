@@ -12,14 +12,16 @@
 #include <adc.h>
 #include <ping.h>
 #include <uart.h>
+#include <object_detection.h>
+
 int main(void)
 {
     timer_init(); //setup the timer
     lcd_init(); //setup the lcd screen
+    uart_init(); // configured for baud rate of 115200
     servo_init();// initalize servo
     button_init(); //initalize button
-    uart_init(); // configured for baud rate of 115200
-    adc_init();
-    ping_init();
+    adc_init(); //initalize adc
+    ping_init(); //initalize  sonar sensor
 }
 
