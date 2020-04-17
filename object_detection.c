@@ -5,7 +5,7 @@
 #include <math.h>
 #include <uart.h>
 #include <adc.h>
-
+#include <button.h>
 
 void sweep(void){
     int i = 0;
@@ -88,4 +88,48 @@ void sweep(void){
         uart_sendStr(buffer); //send data over putty
     }
 
+}
+
+void move(void){
+    unsigned long w;
+    int y;
+    long clockCycles;
+    float Ping_distance;
+    char buffer[50];
+    char header2[] = "\n\rPing\n\r"; //initialize graph headings
+    uart_sendStr(header2); //send the string to putty
+    while (1){
+        y = button_getButton();
+        w = get_angle();
+        if (y == 1){ //if button one is pushed
+           if ((w + 1) >= 180){ //if incrementing the angle will be larger than 180
+               servo_move(180); //move to the max value
+           }
+           else{
+               w += 1;
+               servo_move(w); //add one to the angle
+           }
+       }
+
+        if (y==2){ //if button one is pushed
+        if ((w - 1) <= 0){ //if decreasing the angle will be smaller than 0
+                    servo_move(0);  //move to minimum value
+                }
+        else{
+            w -= 1;
+            servo_move(w); //decrease the angle by one
+        }
+
+        ping_trigger(); //read from sensor
+        while(update_flag ==0){}; //wait for rising edge
+        while(update_flag ==1){}; //wait for falling edge
+        if(update_flag == 2){ //falling edge has occured
+           clockCycles = ping_getClockCycles();
+           Ping_distance = ping_getDistance(); //get distance in centimeters
+        }
+        sprintf(buffer, "%f\n\r", Ping_distance); //format data to send to putty
+        uart_sendStr(buffer); //send data over putty
+    }
+        timer_waitMillis(100);
+    }
 }

@@ -24,6 +24,6 @@ int main(void)
     adc_init(); //initalize adc
     ping_init(); //initalize  sonar sensor
 
-    sweep();
+    move(); //button one should increment counterclockwise, button two should decrement clockwise (output to putty)
 }
 

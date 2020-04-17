@@ -14,6 +14,8 @@
 #include <uart.h>
 #include <adc.h>
 
+
 void sweep(void);
+void move(void);
 
 #endif /* OBJECT_DETECTION_H_ */
